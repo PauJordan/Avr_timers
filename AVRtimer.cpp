@@ -106,9 +106,17 @@ uint16_t Timer::swap_16(volatile uint16_t* addr, uint16_t value){
 	return old_value;
 }
 
+
+
 Timer_base::~Timer_base(){
 
 }
-
-
+/*
+void printTimer2() {
+	printRegister("TCCR2A",TCCR2A);
+	printRegister("TCCR2B",TCCR2B);
+	printRegister("OCR2A",OCR2A);
+	printRegister("TCNT2",TCNT2);
+}
+*/
 

@@ -43,7 +43,6 @@ typedef struct {
 	uint8_t WGMn_2 : 1;
 	bool FOCnB : 1;
 	bool FOCnA : 1;
-
 } RegTCCR2B ;
 
 
@@ -52,10 +51,14 @@ typedef struct {
 	bool OCIEnA : 1;
 	bool OCIEnB : 1;
 	uint8_t : 5;
-
-
-
 } RegTIMSK2;
+
+typedef struct {
+	bool TOFn : 1;
+	bool OCFnA : 1;
+	bool OCFnB : 1;
+	uint8_t : 5;
+} RegTIFR2;
 
 struct Timer2_registers {
 	volatile uint8_t* TCNTn;
@@ -65,6 +68,7 @@ struct Timer2_registers {
 	volatile uint8_t* OCRnB;
 	volatile uint8_t* ASSRaddr;
 	volatile uint8_t* TIMSKn;
+	volatile uint8_t* TIFRn;
 };
 
 

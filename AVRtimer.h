@@ -107,7 +107,7 @@ private:
 };
 
 
-#define TIMER_2 { &TCNT2, &TCCR2A, &TCCR2B, &OCR2A, &OCR2B, &ASSR, &TIMSK2}
+#define TIMER_2 { &TCNT2, &TCCR2A, &TCCR2B, &OCR2A, &OCR2B, &ASSR, &TIMSK2, &TIFR2}
 
 
 
@@ -124,12 +124,15 @@ public:
 	void write(uint8_t i);
 	void set_OC_mode(OC_channel ch, uint8_t mode);
 	void set_OC_value(OC_channel ch, uint8_t value);
-	volatile RegTIMSK2* TIMSKn;
+	void enable_TOI();
+	void disable_TOI();
+
+
 private:
 	volatile RegTCCR2A* TCCRnA;
 	volatile RegTCCR2B* TCCRnB;
-
-
+	volatile RegTIMSK2* TIMSKn;
+	volatile RegTIFR2* TIFRn;
 };
 
 

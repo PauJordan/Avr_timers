@@ -14,12 +14,18 @@ Timer2::Timer2(Timer2_registers tim2reg_addr) :
 tim2reg(tim2reg_addr),
 TCCRnA(reinterpret_cast <volatile RegTCCR2A*> (tim2reg.TCCRnA)),
 TCCRnB(reinterpret_cast <volatile RegTCCR2B*> (tim2reg.TCCRnB)),
-TIMSKn(reinterpret_cast <volatile RegTIMSK2*> (tim2reg.TIMSKn))
-{
+TIMSKn(reinterpret_cast <volatile RegTIMSK2*> (tim2reg.TIMSKn)),
+TIFRn(reinterpret_cast <volatile RegTIFR2*> (tim2reg.TIFRn))
+{}
 
-
+void Timer2::enable_TOI(){
+	TIFRn->TOFn = 1; //Logic 1 to per esborrar una possible flag desatesa prevenint firing interrupt inmediatament
+	TIMSKn->TOIEn = 1;
 }
 
+void Timer2::disable_TOI(){
+	TIMSKn->TOIEn = 0;
+}
 void Timer2::set_mode(unsigned char mode){
 	//Canvia el mode d'operació del timer. Els bits WGM3:0 estan separats en dos parelles en els registres TCCRnA i B.
 	TCCRnA->WGMn_10 = 0b11 & mode;
